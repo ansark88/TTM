@@ -28,7 +28,7 @@
     "@biomejs/biome": "1.9.4",
     "@react-router/dev": "^7.1.5",
     "@tailwindcss/vite": "^4.0.0",
-    "@types/node": "^20",
+    "@types/node": "^22.0.0",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "daisyui": "^4.12.23",
