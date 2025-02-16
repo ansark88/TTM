@@ -1,55 +1,127 @@
-import { Form } from "react-router";
-import { useState } from "react";
+import { Form, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+
 import { supabase } from "lib/supabaseClient";
 import type { Route } from "./+types/signup";
+import { useToast } from "~/hooks/useToast";
+import {
+	ClientInvalidErrorResponse,
+	ClientServerErrorResponse,
+	ClientSuccessResponseWithNoData,
+} from "~/models/apiResponse";
+import { useAuth } from "~/hooks/authContext";
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
 	const formData = await request.formData();
+	const action = formData.get("_action");
+
 	const email = formData.get("email") as string;
 	const password = formData.get("password") as string;
 	const username = formData.get("username") as string;
 
-	try {
-		const { data, error } = await supabase.auth.signUp({
-			email,
-			password,
-			options: {
-				data: {
-					username,
-				},
-			},
-		});
+	switch (action) {
+		case "signup":
+			try {
+				const { data, error } = await supabase.auth.signUp({
+					email,
+					password,
+					options: {
+						data: {
+							username,
+						},
+					},
+				});
 
-		if (error) {
-			console.log(error);
-			return { error: error.message };
-		}
+				if (error) {
+					console.log(error);
+					return ClientInvalidErrorResponse(error.message);
+				}
 
-		console.log(data);
-		return { success: true, user: data.user };
-	} catch (error) {
-		return { error: "サインアップ中にエラーが発生しました" };
+				console.log(data);
+
+				// 別途ログインしてもらうのでsignupではフロントにはデータを返さない
+				return ClientSuccessResponseWithNoData<null>(action);
+			} catch (e) {
+				console.error(e);
+
+				return ClientServerErrorResponse("Internal Server Error");
+			}
+		case "login":
+			try {
+				const { data, error } = await supabase.auth.signInWithPassword({
+					email,
+					password,
+				});
+
+				if (error) {
+					console.log(error);
+					return ClientInvalidErrorResponse(error.message);
+				}
+
+				console.log(data);
+
+				// 成功したらメッセージを出してホームに遷移
+				return ClientSuccessResponseWithNoData<null>(action);
+			} catch (e) {
+				console.error(e);
+
+				return ClientServerErrorResponse("Internal Server Error");
+			}
 	}
 }
 
 export default function Signup({ actionData }: Route.ComponentProps) {
 	const [isSignUp, setIsSignUp] = useState(false);
+	const context = useAuth();
+	const { show } = useToast();
+	const navigate = useNavigate();
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		// 最初にページを開いた時の処理
+		if (!actionData) {
+			console.log(context);
+			if (context.user) {
+				show("既にログインしています", "info");
+			}
+			return;
+		}
+
+		if (actionData?.error) {
+			show(actionData?.error.message, "error");
+			return;
+		}
+
+		if (actionData?.fromAction === "signup") {
+			show("ユーザー登録が完了しました", "success");
+			setTimeout(() => {
+				navigate("/login");
+			}, 1000);
+		}
+
+		if (actionData?.fromAction === "login") {
+			show("ログインしました", "success");
+			setTimeout(() => {
+				navigate("/");
+			}, 300);
+		}
+	}, [actionData]);
 
 	return (
 		<div className="min-h-screen bg-base-200 flex items-center justify-center">
 			<div className="card w-full max-w-xl shadow-2xl bg-base-100 p-4">
-				{actionData?.error && (
-					<div className="alert alert-error">
-						<span>{actionData.error}</span>
-					</div>
-				)}
-
 				<div className="card-body">
 					<h2 className="card-title justify-center text-2xl font-bold mb-4">
 						{isSignUp ? "新規登録" : "ログイン"}
 					</h2>
 
 					<Form method="post" className="space-y-4">
+						<input
+							type="hidden"
+							name="_action"
+							value={isSignUp ? "signup" : "login"}
+						/>
+
 						{isSignUp && (
 							<div className="form-control">
 								<label className="input" htmlFor="username">
