@@ -5,6 +5,6 @@ export default {
   out: "./supabase/migrations",
   dialect: "postgresql",
   dbCredentials: {
-    url: import.meta.env.VITE_DATABASE_URL!,
+    url: process.env.DATABASE_URL!,
   },
 } satisfies Config;

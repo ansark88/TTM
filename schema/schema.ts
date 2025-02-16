@@ -1,11 +1,17 @@
 
 import { pgTable, serial, uuid, varchar, timestamp, text, integer } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+import { authUsers } from "drizzle-orm/supabase"
 
 // supabaseのauth.usersと紐づける
 export const Members = pgTable("members", {
     id: serial('id').primaryKey(),
-    user_id: uuid('user_id').notNull().unique(),
+    user_id: uuid('user_id')
+    .notNull()
+    .references(() => authUsers.id, { 
+      onDelete: 'cascade' // ユーザー削除時の動作
+    })
+    .unique(),
     name: varchar("name", { length: 50 }).notNull(), // @hogehoge のほう
     screen_name: varchar("screen_name", { length: 255 }), // 自由に変更できるほう
     bio: varchar("bio", { length: 255 }),
