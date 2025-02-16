@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import { AppNav } from "./components/appNav";
+import { AuthProvider } from "./hooks/authContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -48,9 +49,11 @@ export default function App() {
       <header className="flex-1 p-0">
         <AppNav />
       </header>
-      <main className="flex-1 p-4 bg-base-200">
-        <Outlet />
-      </main>
+      <AuthProvider>
+        <main className="flex-1 p-4 bg-base-200">
+          <Outlet />
+        </main>
+      </AuthProvider>
     </>
 );
 }
