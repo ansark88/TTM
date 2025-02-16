@@ -1,5 +1,12 @@
 type ToastType = "info" | "success" | "warning" | "error";
 
+const alertClasses: Record<ToastType, string> = {
+	success: "alert alert-success",
+	error: "alert alert-error",
+	warning: "alert alert-warning",
+	info: "alert alert-info",
+};
+
 export function useToast() {
 	const show = (message: string, type: ToastType = "info") => {
 		// 既存のtoastを削除
@@ -13,7 +20,7 @@ export function useToast() {
 		toast.className = "toast toast-top toast-center";
 
 		const alert = document.createElement("div");
-		alert.className = `alert alert-${type}`;
+		alert.className = alertClasses[type];
 		alert.textContent = message;
 		alert.role = "alert";
 
