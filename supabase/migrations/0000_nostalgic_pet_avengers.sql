@@ -1,13 +1,13 @@
 CREATE TABLE "members" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" uuid NOT NULL,
-	"name" varchar(255) NOT NULL,
-	"email" varchar(255) NOT NULL,
-	"avatar_url" varchar(255) NOT NULL,
+	"name" varchar(50) NOT NULL,
+	"screen_name" varchar(255),
+	"bio" varchar(255),
+	"icon_url" varchar(2047),
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "members_user_id_unique" UNIQUE("user_id"),
-	CONSTRAINT "members_email_unique" UNIQUE("email")
+	CONSTRAINT "members_user_id_unique" UNIQUE("user_id")
 );
 --> statement-breakpoint
 CREATE TABLE "posts" (
