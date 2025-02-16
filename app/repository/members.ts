@@ -9,14 +9,12 @@ export class MemberRepository {
 
 			return {
 				data: result,
-				error: null,
 			};
 		} catch (error) {
 			if (error instanceof Error) {
 				// 具体的なエラータイプの処理
 				console.error("データベースエラー:", error.message);
 				return {
-					data: null,
 					error: "データベースの接続に問題が発生しました",
 				};
 			}
@@ -24,7 +22,6 @@ export class MemberRepository {
 			// 予期せぬエラーの処理
 			console.error("予期せぬエラー:", error);
 			return {
-				data: null,
 				error: "予期せぬエラーが発生しました",
 			};
 		}

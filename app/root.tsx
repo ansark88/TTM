@@ -9,6 +9,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { AppNav } from "./components/appNav";
+import { AuthProvider } from "./hooks/authContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,14 +27,14 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ja" data-theme="cupcake" className="min-h-screen bg-base-200">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -42,7 +44,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <header className="flex-1 p-0">
+        <AppNav />
+      </header>
+      <AuthProvider>
+        <main className="flex-1 p-4 bg-base-200">
+          <Outlet />
+        </main>
+      </AuthProvider>
+    </>
+);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

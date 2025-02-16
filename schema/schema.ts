@@ -6,9 +6,10 @@ import { relations } from "drizzle-orm";
 export const Members = pgTable("members", {
     id: serial('id').primaryKey(),
     user_id: uuid('user_id').notNull().unique(),
-    name: varchar("name", { length: 255 }).notNull(),
-    email: varchar("email", { length: 255 }).notNull().unique(),
-    avatar_url: varchar("avatar_url", { length: 255 }).notNull(),
+    name: varchar("name", { length: 50 }).notNull(), // @hogehoge のほう
+    screen_name: varchar("screen_name", { length: 255 }), // 自由に変更できるほう
+    bio: varchar("bio", { length: 255 }),
+    icon_url: varchar("icon_url", { length: 2047 }),
     created_at: timestamp("created_at").notNull().defaultNow(),
     updated_at: timestamp("updated_at").notNull().defaultNow(),
 });
