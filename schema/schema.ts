@@ -6,31 +6,31 @@ import { authUsers } from "drizzle-orm/supabase"
 // supabaseのauth.usersと紐づける
 export const Members = pgTable("members", {
     id: serial('id').primaryKey(),
-    user_id: uuid('user_id')
+    userID: uuid('user_id')
     .notNull()
     .references(() => authUsers.id, { 
       onDelete: 'cascade' // ユーザー削除時の動作
     })
     .unique(),
     name: varchar("name", { length: 50 }).notNull(), // @hogehoge のほう
-    screen_name: varchar("screen_name", { length: 255 }), // 自由に変更できるほう
+    screenName: varchar("screen_name", { length: 255 }), // 自由に変更できるほう
     bio: varchar("bio", { length: 255 }),
-    icon_url: varchar("icon_url", { length: 2047 }),
-    created_at: timestamp("created_at").notNull().defaultNow(),
-    updated_at: timestamp("updated_at").notNull().defaultNow(),
+    iconUrl: varchar("icon_url", { length: 2047 }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 export const Posts = pgTable("posts", {
     id: serial('id').primaryKey(),
-    member_id: integer('member_id').notNull().references(() => Members.id, { onDelete: 'cascade' }),
+    memberID: integer('member_id').notNull().references(() => Members.id, { onDelete: 'cascade' }),
     content: text("content").notNull(),
-    created_at: timestamp("created_at").notNull().defaultNow(),
-    updated_at: timestamp("updated_at").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 export const postsRelations = relations(Posts, ({ one }) => ({
     member: one(Members, {
-        fields: [Posts.member_id],
+        fields: [Posts.memberID],
         references: [Members.id],
     }),
 }));
