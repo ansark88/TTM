@@ -22,17 +22,21 @@ export function AppNav() {
 	return (
 		<>
 			<nav className="navbar flex gap-4 p-4 bg-base-200 border-b border-neutral">
-				<div className="flex-1 gap-4">
-					<NavLink to="/" end>
+				<div className="flex-1 flex gap-4">
+					<NavLink to="/" end className="btn btn-ghost normal-case text-xl">
 						Home
 					</NavLink>
-					<NavLink to="/trending" end>
+					<NavLink
+						to="/trending"
+						end
+						className="btn btn-ghost  normal-case text-xl"
+					>
 						Trend
 					</NavLink>
 				</div>
 
-				<div className="flex-none">
-					<ul className="menu menu-horizontal z-[1] p-2 bg-base-100">
+				<div className="flex-none relative z-100">
+					<ul className="menu menu-horizontal p-2 bg-base-100">
 						<li>
 							<details>
 								<summary>プロフィール</summary>
