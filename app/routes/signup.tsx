@@ -8,7 +8,7 @@ import {
 	ClientInvalidErrorResponse,
 	ClientServerErrorResponse,
 	ClientSuccessResponseWithNoData,
-} from "~/app/models/apiResponse";
+} from "~/app/domain/models/apiResponse";
 import { useAuth } from "~/app/hooks/authContext";
 
 export async function clientAction({ request }: Route.ClientActionArgs) {

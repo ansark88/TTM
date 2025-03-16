@@ -16,6 +16,7 @@
     "@react-router/node": "^7.1.5",
     "@react-router/serve": "^7.1.5",
     "@supabase/supabase-js": "^2.48.1",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.1",
     "isbot": "^5.1.17",
@@ -39,5 +40,12 @@
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild@<=0.24.2": ">=0.25.0",
+      "@babel/runtime@<7.26.10": ">=7.26.10",
+      "@babel/helpers@<7.26.10": ">=7.26.10"
+    }
   }
 }
