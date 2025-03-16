@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import { MemberRepository } from "~/repository/members";
+import { MemberRepository } from "~/app/infrastructure/repositories/memberRepository";
 import MyHome from "../pages/myhome";
 
 export function meta({}: Route.MetaArgs) {

@@ -1,6 +1,6 @@
 // app/routes/users.$userId.tsx
 import { useLoaderData } from "react-router";
-import { Post } from "~/components/post";
+import { Post } from "~/app/components/post";
 import { db } from "../../../lib/databaseClient";
 import { Members, Posts } from "schema/schema";
 import { desc, eq } from "drizzle-orm";

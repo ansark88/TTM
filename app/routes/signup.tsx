@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 
 import { supabase } from "lib/supabaseClient";
 import type { Route } from "./+types/signup";
-import { useToast } from "~/hooks/useToast";
+import { useToast } from "~/app/hooks/useToast";
 import {
 	ClientInvalidErrorResponse,
 	ClientServerErrorResponse,
 	ClientSuccessResponseWithNoData,
-} from "~/models/apiResponse";
-import { useAuth } from "~/hooks/authContext";
+} from "~/app/models/apiResponse";
+import { useAuth } from "~/app/hooks/authContext";
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
 	const formData = await request.formData();
