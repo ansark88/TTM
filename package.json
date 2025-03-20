@@ -9,8 +9,12 @@
     "typecheck": "react-router typegen && tsc",
     "db:generate": "drizzle-kit generate",
     "db:drop": "drizzle-kit drop",
+    "db:test:generate": "drizzle-kit generate --config drizzle.config_unittest.ts",
     "lint": "pnpm biome format --write app/**/*",
-    "format": "pnpm biome format --write app/**/*"
+    "format": "pnpm biome format --write app/**/*",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@react-router/node": "^7.1.5",
@@ -20,7 +24,7 @@
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.1",
     "isbot": "^5.1.17",
-    "postgres": "^3.4.5",
+    "pg": "^8.14.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.1.5"
@@ -29,17 +33,22 @@
     "@biomejs/biome": "1.9.4",
     "@react-router/dev": "^7.1.5",
     "@tailwindcss/vite": "^4.0.0",
+    "@testcontainers/postgresql": "^10.21.0",
     "@types/node": "^20",
+    "@types/pg": "^8.11.11",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
+    "@vitest/ui": "^3.0.8",
     "daisyui": "5.0.4",
     "drizzle-kit": "^0.30.4",
     "react-router-devtools": "^1.1.0",
     "tailwindcss": "^4.0.0",
+    "testcontainers": "^10.21.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.8"
   },
   "pnpm": {
     "overrides": {

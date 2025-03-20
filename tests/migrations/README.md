@@ -1,0 +1,5 @@
+# テストコードについて
+
+DBのユニットテストはtestcontainersを使用する。
+
+supabaseのusersテーブルのschemaはschema.tsには記述されていないため、DBユニットテスト用にmigrationsファイルを別管理とする。
