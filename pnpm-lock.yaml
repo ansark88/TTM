@@ -75,8 +75,8 @@ importers:
         specifier: ^3.0.8
         version: 3.0.8(vitest@3.0.8)
       daisyui:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.5.19
+        version: 5.5.19
       drizzle-kit:
         specifier: ^0.31.0
         version: 0.31.10
@@ -2037,8 +2037,8 @@ packages:
     resolution: {integrity: sha512-b8AmV3kfQaqWAuacbPuNbL6vahnOJflOhexLzMMNLga62+/nh0JzvJ0aO/5a5MVgUFGS7Hu1P9P03o3fJkDCyw==}
     engines: {node: '>=12'}
 
-  daisyui@5.0.4:
-    resolution: {integrity: sha512-9X3oX/k9hPBCslAECk8kYfvwgrz6Grs0lN7VI0/ZTM/hUfq1uFREHxCcBCCq0QROpN183N19B1hTNRWGipO2Eg==}
+  daisyui@5.5.19:
+    resolution: {integrity: sha512-pbFAkl1VCEh/MPCeclKL61I/MqRIFFhNU7yiXoDDRapXN4/qNCoMxeCCswyxEEhqL5eiTTfwHvucFtOE71C9sA==}
 
   date-fns@4.1.0:
     resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
@@ -4683,7 +4683,7 @@ snapshots:
       dedent: 1.7.2(babel-plugin-macros@3.1.0)
       es-module-lexer: 1.7.0
       exit-hook: 2.2.1
-      isbot: 5.1.22
+      isbot: 5.1.36
       jsesc: 3.0.2
       lodash: 4.17.23
       p-map: 7.0.4
@@ -5437,7 +5437,7 @@ snapshots:
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
 
-  daisyui@5.0.4: {}
+  daisyui@5.5.19: {}
 
   date-fns@4.1.0: {}
 
